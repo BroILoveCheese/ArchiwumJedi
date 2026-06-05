@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>WYSZUKIWARKA ARCHIWÓW JEDI</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('image_8cb9d3.jpg');
+            background-size: cover;
+            color: #d4af37;
+            font-family: 'Courier New', monospace;
+        }
+
+        #search-box { padding: 30px; background: rgba(0, 0, 0, 0.85); border: 1px solid #d4af37; text-align: center; width: 450px; }
+        input { width: 90%; padding: 12px; background: #111; border: 1px solid #d4af37; color: #d4af37; margin-bottom: 20px; }
+
+        .result-item { margin: 10px 0; border-bottom: 1px solid #333; padding-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+        .result-item img { width: 50px; height: 50px; object-fit: contain; background: #fff; padding: 2px; }
+        
+        .glitch-mode { background: #0d0202 !important; color: #ff0000 !important; animation: shake 0.1s infinite; }
+        @keyframes shake { 0% { transform: translate(1px, 1px); } 100% { transform: translate(-1px, -1px); } }
+    </style>
+</head>
+<body>
+
+    <div id="search-box">
+        <h1>ARCHIWUM_JEDI</h1>
+        <input type="text" id="searchInput" placeholder="WPISZ FRAZĘ...">
+        <div id="results"></div>
+    </div>
+
+    <script>
+        // SPRAWDŹ CZY ROZSZERZENIA PLIKÓW SĄ TAKIE SAME JAK W NAZWACH (np. czy to na pewno .jpg)
+        const db = [
+            { name: "Holokron", url: "https://docs.google.com/document/d/1OiNOni9EzDKgz0-h4pWUVjNgzH8kHgZkVOVymOkPJ1g/edit?tab=t.0", img: "image_8bdc1c.jpg" },
+            { name: "Zaawansowana wiedza", url: "https://docs.google.com/document/d/1HL8wnOH6Pn8uSl_2t-jzs-R8U9xZ9asecP2_ygdp-XU/edit?tab=t.0", img: "image_8bdc1c.jpg" },
+            { name: "Dokumentacja 21st Armii Sektorowej", url: "https://docs.google.com/document/d/1XTmVDqSHsRSBSjcut6K_t0_aA0SwYfWjetjOhAFZbQ0/edit?tab=t.0", img: "image_8bdc7a.jpg" },
+            { name: "Dokumentacja Zakonu Jedi", url: "https://docs.google.com/document/d/1Ds1ENtIg-oiREQ14Vj_ebCTw81ln9bdwR27v2FbS9xE/edit?tab=t.0", img: "image_8bdfa5.jpg" },
+            { name: "Roster", url: "https://docs.google.com/spreadsheets/d/18wNEDMvgP19c0tew2HQdPLfIy6BE81uUIUbfnNQs88w/edit?gid=822186749#gid=822186749", img: "image_8bdfa5.jpg" }
+        ];
+
+        const input = document.getElementById('searchInput');
+        const results = document.getElementById('results');
+
+        input.addEventListener('input', function() {
+            const val = this.value;
+
+            if (val === "Metro o północy") {
+                document.body.classList.add('glitch-mode');
+                results.innerHTML = "<p>DOSTĘP ZABLOKOWANY. WPROWADŹ HASŁO:</p><input type='password' id='finalPass' style='color:red;'>";
+                document.getElementById('finalPass').addEventListener('keypress', (e) => {
+                    if(e.key === 'Enter' && e.target.value === 'Choroba') {
+                        window.location.href = 'https://docs.google.com/document/d/1jvqi9kUvucHQEclWE9tUUSyGJqM6eeYisnJrJXIuTCg/edit?tab=t.8ah4jcpvan6g';
+                    }
+                });
+                return;
+            }
+
+            results.innerHTML = "";
+            const filtered = db.filter(item => item.name.toLowerCase().includes(val.toLowerCase()));
+            filtered.forEach(item => {
+                results.innerHTML += `
+                    <div class="result-item">
+                        <img src="${item.img}" alt="X">
+                        <a href="${item.url}" target="_blank" style="color:#d4af37; text-decoration:none;">${item.name}</a>
+                    </div>`;
+            });
+        });
+    </script>
+</body>
+</html>

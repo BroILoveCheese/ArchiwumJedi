@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>ARCHIWUM ZAKONU JEDI</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Twoja grafika jako tło */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('image_8cb9d3.jpg');
+            background-size: cover;
+            color: #d4af37;
+            font-family: 'Courier New', monospace;
+        }
+
+        .archive-shelf {
+            margin-top: 50px;
+            padding: 20px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid #d4af37;
+        }
+
+        .secret-book {
+            width: 60px;
+            height: 180px;
+            background: #3a2a1a;
+            border: 2px solid #5a4a3a;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        /* Efekt odkrycia po najechaniu myszką */
+        .secret-book:hover {
+            background: url('202606~1.jpg');
+            background-size: cover;
+            border: 2px solid #ff0000;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ARCHIWUM RADY JEDI</h1>
+    <p>Biblioteka jest pusta. Czy na pewno wszystkie tomy zostały spisane?</p>
+
+    <div class="archive-shelf">
+        <div class="secret-book" onclick="window.location.href='archives.html'" title="Dostęp specjalny"></div>
+    </div>
+
+</body>
+</html>
